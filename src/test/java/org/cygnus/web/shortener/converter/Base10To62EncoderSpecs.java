@@ -5,22 +5,21 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class Base62ConverterSpecs {
+public class Base10To62EncoderSpecs {
 
     @Test
-    public void shouldEncodeWhenSourceNotZero()
-    {
+    public void shouldEncodeWhenSourceNotZero() {
         final String expected = "cb";
 
-        String actual = new Base62EncoderImpl().Execute(125L);
+        String actual = new Base10To62EncoderImpl().Execute(125L);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldNotEncodeWhenSourceEqualsZero()
-    {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Base62EncoderImpl().Execute(null));
+    public void shouldNotEncodeWhenSourceEqualsZero() {
+        Exception exception = assertThrows(IllegalArgumentException.class, ()
+                -> new Base10To62EncoderImpl().Execute(null));
 
         final String expected = "Invalid input: source cannot be null or zero.";
 
@@ -28,9 +27,9 @@ public class Base62ConverterSpecs {
     }
 
     @Test
-    public void shouldNotEncodeWhenSourceIsNull()
-    {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Base62EncoderImpl().Execute(null));
+    public void shouldNotEncodeWhenSourceIsNull() {
+        Exception exception = assertThrows(IllegalArgumentException.class, ()
+                -> new Base10To62EncoderImpl().Execute(null));
 
         final String expected = "Invalid input: source cannot be null or zero.";
 
