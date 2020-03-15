@@ -38,7 +38,7 @@ public class ShortenerControllerTests {
                 .contentType("application/json")
                 .body(input)
                 .when()
-                .post("/api/v1/url/shorten")
+                .post("/api/v1/shorten")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
