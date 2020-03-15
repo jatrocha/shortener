@@ -21,18 +21,15 @@ public class ShortenerControllerTests {
     @Value("${base.url}")
     private String BASE_URL;
 
-    @Value("${shorten.url.prefix}")
-    private String SHORTEN_URL_PREFIX;
-
     @Test
-    public void should() {
+    public void shouldShortenUrl() {
         final String url =
                 "https://cygnus-x1.visualstudio.com/Neueda/_sprints/taskboard/Neueda%20Team/Neueda/Iteration%201" +
                         "?workitem=76";
 
         Url input = new Url(url);
 
-        String expected = BASE_URL + SHORTEN_URL_PREFIX + "b9eNGS";
+        String expected = BASE_URL + "b9eNGS";
 
         given()
                 .contentType("application/json")

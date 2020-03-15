@@ -30,9 +30,6 @@ public class UrlShortenServiceTests {
     @Value("${base.url}")
     private String BASE_URL;
 
-    @Value("${shorten.url.prefix}")
-    private String SHORTEN_URL_PREFIX;
-
     @Test
     public void shouldShortenANewUrl() {
         final String url =
@@ -41,7 +38,7 @@ public class UrlShortenServiceTests {
 
         Url input = new Url(url);
 
-        String baseUrl = BASE_URL + SHORTEN_URL_PREFIX + "b9eNGS";
+        String baseUrl = BASE_URL + "b9eNGS";
 
         final Url expected = new Url(baseUrl);
 

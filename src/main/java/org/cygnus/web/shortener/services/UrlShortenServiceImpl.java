@@ -16,9 +16,6 @@ public class UrlShortenServiceImpl implements IUrlShortenService {
     @Value("${base.url}")
     private String BASE_URL;
 
-    @Value("${shorten.url.prefix}")
-    private String SHORTEN_URL_PREFIX;
-
     private final IEncoder<Long, String> encoder;
 
     private final JpaRepository<ShortenedUrl, String> repository;
@@ -39,7 +36,7 @@ public class UrlShortenServiceImpl implements IUrlShortenService {
             repository.save(new ShortenedUrl(key, source.getValue()));
         }
 
-        return new Url(BASE_URL + SHORTEN_URL_PREFIX + key);
+        return new Url(BASE_URL + key);
     }
 
     protected final String generateKey(final String source) {
