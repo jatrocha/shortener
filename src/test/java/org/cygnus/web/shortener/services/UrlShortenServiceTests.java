@@ -4,6 +4,7 @@ import org.cygnus.web.shortener.domain.Url;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,6 +20,12 @@ public class UrlShortenServiceTests {
     @Autowired
     private IUrlShortenService service;
 
+    @Value("${base.url}")
+    private String BASE_URL;
+
+    @Value("${shorten.url.prefix}")
+    private String SHORTEN_URL_PREFIX;
+
     @Test
     public void shouldShortenUrl() {
         final String url =
@@ -27,7 +34,9 @@ public class UrlShortenServiceTests {
 
         Url input = new Url(url);
 
-        final Url expected = new Url("b9eNGS");
+        String baseUrl = BASE_URL + SHORTEN_URL_PREFIX + "b9eNGS";
+
+        final Url expected = new Url(baseUrl);
 
         Url actual = service.Execute(input);
 

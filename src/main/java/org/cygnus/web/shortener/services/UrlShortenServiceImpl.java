@@ -24,9 +24,9 @@ public class UrlShortenServiceImpl implements IUrlShortenService {
 
     public Url Execute(final Url source) {
 
-        String key = generateKey(source.getValue());
+        String url = BASE_URL + SHORTEN_URL_PREFIX + generateKey(source.getValue());
 
-        return new Url(generateKey(source.getValue()));
+        return new Url(url);
     }
 
     protected final String generateKey(final String source) {
@@ -35,6 +35,6 @@ public class UrlShortenServiceImpl implements IUrlShortenService {
             throw new IllegalArgumentException("Invalid input: source cannot be null or empty.");
         }
 
-        return encoder.Execute(new Long(source.hashCode()));
+        return encoder.Execute((long) source.hashCode());
     }
 }
