@@ -1,6 +1,11 @@
 package org.cygnus.web.shortener.services;
 
+import org.cygnus.web.shortener.converter.Base10To62EncoderImpl;
 import org.cygnus.web.shortener.domain.Url;
+import org.cygnus.web.shortener.entities.ShortenedUrl;
+import org.cygnus.web.shortener.repository.ShortenedUrlRepository;
+import org.jmock.Expectations;
+import org.jmock.Mockery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,7 +34,7 @@ public class UrlShortenServiceTests {
     private String SHORTEN_URL_PREFIX;
 
     @Test
-    public void shouldShortenUrl() {
+    public void shouldShortenANewUrl() {
         final String url =
                 "https://cygnus-x1.visualstudio.com/Neueda/_sprints/taskboard/Neueda%20Team/Neueda/Iteration%201" +
                         "?workitem=76";
@@ -43,11 +50,26 @@ public class UrlShortenServiceTests {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldReturnAlreadyShortenedUrl() {
+        final String url =
+                "https://cygnus-x1.visualstudio.com/Neueda/_sprints/taskboard/Neueda%20Team/Neueda/Iteration%201" +
+                        "?workitem=76";
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldNotGenerateKeyWhenUrlIsInvalidNull() {
+        Mockery context = new Mockery();
 
-        new UrlShortenServiceImpl().generateKey(null);
+        final ShortenedUrlRepository mock = context.mock(ShortenedUrlRepository.class);
+
+        context.checking(new Expectations() {{
+            oneOf(mock).findById("b9eNGS");
+            will(returnValue(Optional.of(new ShortenedUrl("b9eNGS", url))));
+        }});
+
+        Url input = new Url(url);
+
+        new UrlShortenServiceImpl(new Base10To62EncoderImpl(), mock).Execute(input);
+
+        context.assertIsSatisfied();
     }
 
 }

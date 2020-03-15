@@ -45,4 +45,9 @@ public class Url {
 
         return Objects.hash(value);
     }
+
+    @Override
+    public String toString() {
+        return "Url{" + "value='" + value + '\'' + '}';
+    }
 }
