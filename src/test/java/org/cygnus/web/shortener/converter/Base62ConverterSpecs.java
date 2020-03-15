@@ -10,8 +10,6 @@ public class Base62ConverterSpecs {
     @Test
     public void shouldEncodeWhenSourceNotZero()
     {
-        //meh
-
         final String expected = "cb";
 
         String actual = new Base62EncoderImpl().Execute(125L);
