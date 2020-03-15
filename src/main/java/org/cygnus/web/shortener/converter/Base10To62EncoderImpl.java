@@ -1,5 +1,8 @@
 package org.cygnus.web.shortener.converter;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Base10To62EncoderImpl implements IEncoder<Long, String> {
 
     /**
