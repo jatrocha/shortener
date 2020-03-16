@@ -1,4 +1,4 @@
-package org.cygnus.web.shortener.converter;
+package org.cygnus.web.shortener.encoder;
 
 public interface IEncoder<S, T> {
 

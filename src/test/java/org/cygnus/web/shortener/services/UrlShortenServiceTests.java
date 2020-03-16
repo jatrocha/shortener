@@ -1,7 +1,7 @@
 package org.cygnus.web.shortener.services;
 
-import org.cygnus.web.shortener.converter.Base10To62EncoderImpl;
 import org.cygnus.web.shortener.domain.Url;
+import org.cygnus.web.shortener.encoder.Base10To62EncoderImpl;
 import org.cygnus.web.shortener.entities.ShortenedUrl;
 import org.cygnus.web.shortener.repository.ShortenedUrlRepository;
 import org.jmock.Expectations;

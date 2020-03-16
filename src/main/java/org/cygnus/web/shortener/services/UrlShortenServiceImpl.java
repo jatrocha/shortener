@@ -1,7 +1,7 @@
 package org.cygnus.web.shortener.services;
 
-import org.cygnus.web.shortener.converter.IEncoder;
 import org.cygnus.web.shortener.domain.Url;
+import org.cygnus.web.shortener.encoder.IEncoder;
 import org.cygnus.web.shortener.entities.ShortenedUrl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
