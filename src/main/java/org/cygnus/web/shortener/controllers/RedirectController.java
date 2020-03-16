@@ -1,6 +1,7 @@
 package org.cygnus.web.shortener.controllers;
 
 import org.cygnus.web.shortener.entities.ShortenedUrl;
+import org.cygnus.web.shortener.services.ITelemetryService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,14 @@ public final class RedirectController {
 
     private final JpaRepository<ShortenedUrl, String> shortenedUrlRepository;
 
-    public RedirectController(final JpaRepository<ShortenedUrl, String> repository) {
+    private ITelemetryService telemetryService;
+
+    public RedirectController(final JpaRepository<ShortenedUrl, String> repository,
+                              final ITelemetryService service) {
 
         this.shortenedUrlRepository = repository;
+
+        this.telemetryService = service;
     }
 
     @GetMapping("/{key}")
@@ -26,8 +32,12 @@ public final class RedirectController {
 
         Optional<ShortenedUrl> result = shortenedUrlRepository.findById(url);
 
-        return result
-                .map(shortenedUrl -> new ModelAndView("redirect:" + shortenedUrl.getOriginalUrl()))
-                .orElseGet(() -> new ModelAndView(("url_not_found")));
+        if (result.isPresent()) {
+            telemetryService.registerHit(result.get().getKey());
+
+            return new ModelAndView("redirect:" + result.get().getOriginalUrl());
+        }
+
+        return new ModelAndView("url_not_found");
     }
 }

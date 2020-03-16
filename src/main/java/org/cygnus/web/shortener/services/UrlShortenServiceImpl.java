@@ -13,38 +13,38 @@ import javax.transaction.Transactional;
 @Service
 public class UrlShortenServiceImpl implements IUrlShortenService {
 
-    @Value("${base.url}")
-    private String baseUrl;
-
     private final IEncoder<Long, String> encoder;
 
     private final JpaRepository<ShortenedUrl, String> repository;
 
+    private final ITelemetryService telemetryService;
+
+    @Value("${base.url}")
+    private String baseUrl;
+
     public UrlShortenServiceImpl(final IEncoder<Long, String> encoder,
-                                 final JpaRepository<ShortenedUrl, String> repository) {
+                                 final JpaRepository<ShortenedUrl, String> repository,
+                                 final ITelemetryService service) {
 
         this.encoder = encoder;
 
         this.repository = repository;
+
+        this.telemetryService = service;
     }
 
     public Url execute(final Url source) {
 
         String key = generateKey(source.getValue());
 
-        Url result = new Url(baseUrl + key);
-
         if (!repository.findById(key).isPresent()) {
 
-            // register hits for equal keys
+            telemetryService.registerNew(key);
 
             repository.save(new ShortenedUrl(key, source.getValue()));
-        } else {
-            
-            // register hits for new keys.
         }
 
-        return result;
+        return new Url(baseUrl + key);
     }
 
     protected final String generateKey(final String source) {

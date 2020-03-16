@@ -4,8 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "shortened_url",
-        indexes = @Index(name = "index_original_url", columnList = "original_url", unique = true),
-        uniqueConstraints = @UniqueConstraint(columnNames = "KEY", name = "shorten_url_uq_shorten_key"))
+        indexes = @Index(name = "index_original_url", columnList = "original_url", unique = true))
 public final class ShortenedUrl {
 
     @Column(name = "original_url")
@@ -29,4 +28,7 @@ public final class ShortenedUrl {
         return originalUrl;
     }
 
+    public String getKey() {
+        return this.key;
+    }
 }

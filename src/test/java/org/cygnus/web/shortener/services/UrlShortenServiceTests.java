@@ -64,7 +64,7 @@ public class UrlShortenServiceTests {
 
         Url input = new Url(url);
 
-        new UrlShortenServiceImpl(new Base10To62EncoderImpl(), mock).execute(input);
+        new UrlShortenServiceImpl(new Base10To62EncoderImpl(), mock, null).execute(input);
 
         context.assertIsSatisfied();
     }
