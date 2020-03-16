@@ -50,6 +50,6 @@ public class Telemetry {
     }
 
     public void addHitCount() {
-        this.hitCount = +1;
+        this.hitCount = ++this.hitCount;
     }
 }
