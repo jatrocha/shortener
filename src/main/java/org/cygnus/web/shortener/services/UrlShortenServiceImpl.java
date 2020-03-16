@@ -32,12 +32,19 @@ public class UrlShortenServiceImpl implements IUrlShortenService {
 
         String key = generateKey(source.getValue());
 
+        Url result = new Url(baseUrl + key);
+
         if (!repository.findById(key).isPresent()) {
 
+            // register hits for equal keys
+
             repository.save(new ShortenedUrl(key, source.getValue()));
+        } else {
+            
+            // register hits for new keys.
         }
 
-        return new Url(baseUrl + key);
+        return result;
     }
 
     protected final String generateKey(final String source) {

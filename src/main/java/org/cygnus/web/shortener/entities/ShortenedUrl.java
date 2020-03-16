@@ -1,9 +1,6 @@
 package org.cygnus.web.shortener.entities;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "shortened_url",
@@ -18,15 +15,7 @@ public final class ShortenedUrl {
     @Column(name = "key")
     private String key;
 
-    @CreationTimestamp
-    @Column(name = "create_time_stamp", updatable = false)
-    private LocalDateTime createTimeStamp;
-
     public ShortenedUrl() {
-    }
-
-    public ShortenedUrl(final String originalUrl) {
-        this.originalUrl = originalUrl;
     }
 
     public ShortenedUrl(final String key, final String originalUrl) {
@@ -40,23 +29,4 @@ public final class ShortenedUrl {
         return originalUrl;
     }
 
-    public void setOriginalUrl(final String originalUrl) {
-        this.originalUrl = originalUrl;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(final String shortenKey) {
-        this.key = shortenKey;
-    }
-
-    public LocalDateTime getCreateTimeStamp() {
-        return createTimeStamp;
-    }
-
-    public void setCreateTimeStamp(final LocalDateTime createTimeStamp) {
-        this.createTimeStamp = createTimeStamp;
-    }
 }
