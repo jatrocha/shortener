@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
-public class Url {
+public final class Url {
 
     @NotEmpty(message = "{val.err.original.url.not.empty.or.null}")
     @URL(message = "{val.err.original.url.invalid}")
@@ -14,26 +14,33 @@ public class Url {
     public Url() {
     }
 
-    public Url(final String value) {
+    public Url(final String url) {
 
-        this.setValue(value);
+        this.setValue(url);
     }
 
     public String getValue() {
+
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(final String value) {
 
         this.value = value;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
 
-        if (this == o) return true;
+        if (this == o) {
 
-        if (o == null || getClass() != o.getClass()) return false;
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+
+            return false;
+        }
 
         Url url = (Url) o;
 

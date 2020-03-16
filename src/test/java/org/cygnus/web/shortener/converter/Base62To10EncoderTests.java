@@ -12,7 +12,7 @@ public class Base62To10EncoderTests {
 
         final Long expected = 125L;
 
-        Long actual = new Base62To10EncoderImpl().Execute("cb");
+        Long actual = new Base62To10EncoderImpl().execute("cb");
 
         assertEquals(expected, actual);
     }
@@ -20,13 +20,13 @@ public class Base62To10EncoderTests {
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotDecodeWhenSourceIsEmpty() {
 
-        new Base62To10EncoderImpl().Execute(StringUtils.EMPTY);
+        new Base62To10EncoderImpl().execute(StringUtils.EMPTY);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotDecodeWhenSourceIsNull() {
 
-        new Base62To10EncoderImpl().Execute(null);
+        new Base62To10EncoderImpl().execute(null);
     }
 
 }

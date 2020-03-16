@@ -13,19 +13,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
-public class ShortenerController {
+public final class ShortenerController {
 
-    private final IUrlShortenService service;
+    private final IUrlShortenService shortenService;
 
-    public ShortenerController(IUrlShortenService service) {
+    public ShortenerController(final IUrlShortenService service) {
 
-        this.service = service;
+        this.shortenService = service;
     }
 
     @PostMapping("/shorten")
-    public ResponseEntity<Url> shortenUrl(@Validated @RequestBody Url url) {
+    public ResponseEntity<Url> shortenUrl(final @Validated @RequestBody Url url) {
 
-        Url result = service.Execute(url);
+        Url result = shortenService.execute(url);
 
         return ResponseEntity.of(Optional.of(result));
     }

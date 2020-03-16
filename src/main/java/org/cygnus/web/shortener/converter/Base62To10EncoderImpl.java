@@ -12,7 +12,7 @@ public class Base62To10EncoderImpl implements IEncoder<String, Long> {
      * @throws IllegalArgumentException when source is null or empty.
      */
     @Override
-    public Long Execute(final String source) {
+    public Long execute(final String source) {
 
         if (source == null || StringUtils.EMPTY.equals(source)) {
 

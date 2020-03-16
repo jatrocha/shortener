@@ -41,7 +41,7 @@ public class RedirectControllerTests {
     public void shouldRedirectToOriginalUrl() {
         final String expected = "https://www.microsoft.com/";
 
-        Url shortened = service.Execute(new Url(expected));
+        Url shortened = service.execute(new Url(expected));
 
         String key = shortened.getValue().split("/")[3];
 

@@ -14,20 +14,21 @@ import javax.transaction.Transactional;
 public class UrlShortenServiceImpl implements IUrlShortenService {
 
     @Value("${base.url}")
-    private String BASE_URL;
+    private String baseUrl;
 
     private final IEncoder<Long, String> encoder;
 
     private final JpaRepository<ShortenedUrl, String> repository;
 
-    public UrlShortenServiceImpl(IEncoder<Long, String> encoder, JpaRepository<ShortenedUrl, String> repository) {
+    public UrlShortenServiceImpl(final IEncoder<Long, String> encoder,
+                                 final JpaRepository<ShortenedUrl, String> repository) {
 
         this.encoder = encoder;
 
         this.repository = repository;
     }
 
-    public Url Execute(final Url source) {
+    public Url execute(final Url source) {
 
         String key = generateKey(source.getValue());
 
@@ -36,11 +37,11 @@ public class UrlShortenServiceImpl implements IUrlShortenService {
             repository.save(new ShortenedUrl(key, source.getValue()));
         }
 
-        return new Url(BASE_URL + key);
+        return new Url(baseUrl + key);
     }
 
     protected final String generateKey(final String source) {
 
-        return encoder.Execute((long) source.hashCode());
+        return encoder.execute((long) source.hashCode());
     }
 }

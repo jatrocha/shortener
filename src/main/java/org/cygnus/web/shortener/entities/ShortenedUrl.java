@@ -2,22 +2,20 @@ package org.cygnus.web.shortener.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-//@Table(name = "SHORTENED_URL"
-//        , indexes = @Index(name = "index_original_url", columnList = "original_url", unique = true)
-//        , uniqueConstraints = @UniqueConstraint(columnNames = "shorten_key", name = "shorten_url_uq_shorten_key"))
-public class ShortenedUrl {
+@Table(name = "shortened_url",
+        indexes = @Index(name = "index_original_url", columnList = "original_url", unique = true),
+        uniqueConstraints = @UniqueConstraint(columnNames = "KEY", name = "shorten_url_uq_shorten_key"))
+public final class ShortenedUrl {
 
-    @Column(name = "ORIGINAL_URL")
+    @Column(name = "original_url")
     private String originalUrl;
 
     @Id
-    @Column(name = "KEY")
+    @Column(name = "key")
     private String key;
 
     @CreationTimestamp
@@ -27,11 +25,11 @@ public class ShortenedUrl {
     public ShortenedUrl() {
     }
 
-    public ShortenedUrl(String originalUrl) {
+    public ShortenedUrl(final String originalUrl) {
         this.originalUrl = originalUrl;
     }
 
-    public ShortenedUrl(String key, String originalUrl) {
+    public ShortenedUrl(final String key, final String originalUrl) {
 
         this.originalUrl = originalUrl;
 
@@ -42,7 +40,7 @@ public class ShortenedUrl {
         return originalUrl;
     }
 
-    public void setOriginalUrl(String originalUrl) {
+    public void setOriginalUrl(final String originalUrl) {
         this.originalUrl = originalUrl;
     }
 
@@ -50,7 +48,7 @@ public class ShortenedUrl {
         return key;
     }
 
-    public void setKey(String shortenKey) {
+    public void setKey(final String shortenKey) {
         this.key = shortenKey;
     }
 
@@ -58,7 +56,7 @@ public class ShortenedUrl {
         return createTimeStamp;
     }
 
-    public void setCreateTimeStamp(LocalDateTime createTimeStamp) {
+    public void setCreateTimeStamp(final LocalDateTime createTimeStamp) {
         this.createTimeStamp = createTimeStamp;
     }
 }

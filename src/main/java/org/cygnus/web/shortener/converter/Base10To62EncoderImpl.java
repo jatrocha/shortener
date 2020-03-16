@@ -13,9 +13,9 @@ public class Base10To62EncoderImpl implements IEncoder<Long, String> {
      * @throws IllegalArgumentException when source is null or equals to zero.
      */
     @Override
-    public String Execute(Long source) {
+    public String execute(Long source) {
 
-        if(source == null || source.equals(0L)){
+        if (source == null || source.equals(0L)) {
 
             throw new IllegalArgumentException("Invalid input: source cannot be null or zero.");
         }

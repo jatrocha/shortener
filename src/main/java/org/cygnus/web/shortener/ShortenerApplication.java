@@ -6,7 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ShortenerApplication {
 
-    public static void main(String[] args) {
+    protected ShortenerApplication() {
+    }
+
+    public static void main(final String[] args) {
+
         SpringApplication.run(ShortenerApplication.class, args);
     }
 

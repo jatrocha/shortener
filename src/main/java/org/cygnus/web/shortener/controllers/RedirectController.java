@@ -12,19 +12,19 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping()
-public class RedirectController {
+public final class RedirectController {
 
-    private final JpaRepository<ShortenedUrl, String> repository;
+    private final JpaRepository<ShortenedUrl, String> shortenedUrlRepository;
 
-    public RedirectController(JpaRepository<ShortenedUrl, String> repository) {
+    public RedirectController(final JpaRepository<ShortenedUrl, String> repository) {
 
-        this.repository = repository;
+        this.shortenedUrlRepository = repository;
     }
 
-    @GetMapping("/{shortenStr}")
-    public ModelAndView redirectToOriginalUrl(@PathVariable("shortenStr") String url) {
+    @GetMapping("/{key}")
+    public ModelAndView redirectToOriginalUrl(final @PathVariable("key") String url) {
 
-        Optional<ShortenedUrl> result = repository.findById(url);
+        Optional<ShortenedUrl> result = shortenedUrlRepository.findById(url);
 
         return result
                 .map(shortenedUrl -> new ModelAndView("redirect:" + shortenedUrl.getOriginalUrl()))

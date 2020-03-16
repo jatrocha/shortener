@@ -11,7 +11,7 @@ public class Base10To62EncoderTests {
     public void shouldEncodeWhenSourceNotZero() {
         final String expected = "cb";
 
-        String actual = new Base10To62EncoderImpl().Execute(125L);
+        String actual = new Base10To62EncoderImpl().execute(125L);
 
         assertEquals(expected, actual);
     }
@@ -19,13 +19,13 @@ public class Base10To62EncoderTests {
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotEncodeWhenSourceEqualsZero() {
 
-        new Base10To62EncoderImpl().Execute(0L);
+        new Base10To62EncoderImpl().execute(0L);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotEncodeWhenSourceIsNull() {
 
-        new Base10To62EncoderImpl().Execute(null);
+        new Base10To62EncoderImpl().execute(null);
     }
 
 }

@@ -42,7 +42,7 @@ public class UrlShortenServiceTests {
 
         final Url expected = new Url(baseUrl);
 
-        Url actual = service.Execute(input);
+        Url actual = service.execute(input);
 
         assertEquals(expected, actual);
     }
@@ -64,7 +64,7 @@ public class UrlShortenServiceTests {
 
         Url input = new Url(url);
 
-        new UrlShortenServiceImpl(new Base10To62EncoderImpl(), mock).Execute(input);
+        new UrlShortenServiceImpl(new Base10To62EncoderImpl(), mock).execute(input);
 
         context.assertIsSatisfied();
     }

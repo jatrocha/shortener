@@ -6,5 +6,5 @@ public interface IEncoder<S, T> {
 
     long BASE = POSSIBLE_ALPHABET.length();
 
-    T Execute(S source);
+    T execute(S source);
 }
